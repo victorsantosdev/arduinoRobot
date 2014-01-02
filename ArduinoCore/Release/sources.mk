@@ -15,9 +15,6 @@ C++_SRCS :=
 CC_SRCS := 
 OBJS := 
 C_DEPS := 
-EEPROM_IMAGE := 
-FLASH_IMAGE := 
-ELFS := 
 LSS := 
 S_DEPS := 
 CXX_DEPS := 
@@ -25,6 +22,7 @@ S_UPPER_DEPS :=
 C++_DEPS := 
 ASM_DEPS := 
 CC_DEPS := 
+ARCHIVES := 
 CPP_DEPS := 
 C_UPPER_DEPS := 
 SIZEDUMMY := 
@@ -32,7 +30,5 @@ SIZEDUMMY :=
 # Every subdirectory with source files must be described here
 SUBDIRS := \
 . \
-arduino \
-arduino/avr-libc \
-SoftwareSerial \
+avr-libc \
 

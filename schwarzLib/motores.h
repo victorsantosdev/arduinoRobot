@@ -8,7 +8,6 @@
 
 #ifndef _MOTORES_H
 #define	_MOTORES_H
-
 #define MOTOR_SHIELD_DDR        DDRD
 #define MOTOR_SHIELD_PORT       PORTD
 #define MOTOR_SHIELD_PIN        PIND

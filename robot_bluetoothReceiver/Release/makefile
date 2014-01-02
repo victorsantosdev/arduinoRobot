@@ -8,6 +8,8 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include arduino/avr-libc/subdir.mk
+-include arduino/subdir.mk
 -include SoftwareSerial/subdir.mk
 -include subdir.mk
 -include objects.mk
@@ -65,7 +67,7 @@ all: robot_bluetoothReceiver.elf secondary-outputs
 robot_bluetoothReceiver.elf: $(OBJS) $(USER_OBJS)
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc -s -Os -o"robot_bluetoothReceiver.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -L"/home/victor/workspace/avr_work/Arduino_Uno/Release" -mmcu=atmega328p
+	avr-gcc -s -Os -o"robot_bluetoothReceiver.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -L"/Release" -mmcu=atmega328p
 	@echo 'Finished building target: $@'
 	@echo ' '
 

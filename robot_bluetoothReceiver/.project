@@ -3,7 +3,7 @@
 	<name>robot_bluetoothReceiver</name>
 	<comment></comment>
 	<projects>
-		<project>Arduino_Uno</project>
+		<project>ArduinoCore</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
@@ -31,6 +31,11 @@
 			<name>SoftwareSerial</name>
 			<type>2</type>
 			<locationURI>ArduinoLibPath/SoftwareSerial</locationURI>
+		</link>
+		<link>
+			<name>arduino</name>
+			<type>2</type>
+			<locationURI>PARENT-3-PROJECT_LOC/arduino/arduino-1.0.5/hardware/arduino/cores/arduino</locationURI>
 		</link>
 		<link>
 			<name>motores.h</name>
