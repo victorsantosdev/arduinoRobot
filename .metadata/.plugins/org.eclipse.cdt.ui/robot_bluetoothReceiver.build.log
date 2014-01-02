@@ -1,0 +1,61 @@
+22:26:36 **** Build of configuration Release for project robot_bluetoothReceiver ****
+make all 
+Building file: /home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial/SoftwareSerial.cpp
+Invoking: AVR C++ Compiler
+avr-g++ -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino" -I/home/victor/workspace/avr_work/schwarzLib -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard" -I"/home/victor/workspace/avr_work/robot_bluetoothReceiver" -I"/home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial" -D__IN_ECLIPSE__=1 -DUSB_VID= -DUSB_PID= -DARDUINO=105 -Wall -Os -ffunction-sections -fdata-sections -fno-exceptions -g -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"SoftwareSerial/SoftwareSerial.d" -MT"SoftwareSerial/SoftwareSerial.d"  -c -o "SoftwareSerial/SoftwareSerial.o" -x c++ "/home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial/SoftwareSerial.cpp"
+../motores.cpp: In function ‘void move_motores(int, int)’:
+../motores.cpp:14:6: warning: unused variable ‘obstaculo_ir’ [-Wunused-variable]
+../robot_bluetoothReceiver.cpp: In function ‘void loop()’:
+Finished building: /home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial/SoftwareSerial.cpp
+../robot_bluetoothReceiver.cpp:176:39: warning: comparison between signed and unsigned integer expressions [-Wsign-compare]
+ 
+Building file: ../motores.cpp
+Invoking: AVR C++ Compiler
+avr-g++ -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino" -I/home/victor/workspace/avr_work/schwarzLib -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard" -I"/home/victor/workspace/avr_work/robot_bluetoothReceiver" -I"/home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial" -D__IN_ECLIPSE__=1 -DUSB_VID= -DUSB_PID= -DARDUINO=105 -Wall -Os -ffunction-sections -fdata-sections -fno-exceptions -g -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"motores.d" -MT"motores.d"  -c -o "motores.o" -x c++ "../motores.cpp"
+Finished building: ../motores.cpp
+ 
+Building file: ../robot_bluetoothReceiver.cpp
+Invoking: AVR C++ Compiler
+avr-g++ -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino" -I/home/victor/workspace/avr_work/schwarzLib -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard" -I"/home/victor/workspace/avr_work/robot_bluetoothReceiver" -I"/home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial" -D__IN_ECLIPSE__=1 -DUSB_VID= -DUSB_PID= -DARDUINO=105 -Wall -Os -ffunction-sections -fdata-sections -fno-exceptions -g -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"robot_bluetoothReceiver.d" -MT"robot_bluetoothReceiver.d"  -c -o "robot_bluetoothReceiver.o" -x c++ "../robot_bluetoothReceiver.cpp"
+Finished building: ../robot_bluetoothReceiver.cpp
+ 
+Building file: ../sensorIR.cpp
+Invoking: AVR C++ Compiler
+avr-g++ -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino" -I/home/victor/workspace/avr_work/schwarzLib -I"/home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard" -I"/home/victor/workspace/avr_work/robot_bluetoothReceiver" -I"/home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial" -D__IN_ECLIPSE__=1 -DUSB_VID= -DUSB_PID= -DARDUINO=105 -Wall -Os -ffunction-sections -fdata-sections -fno-exceptions -g -mmcu=atmega328p -DF_CPU=16000000UL -MMD -MP -MF"sensorIR.d" -MT"sensorIR.d"  -c -o "sensorIR.o" -x c++ "../sensorIR.cpp"
+Finished building: ../sensorIR.cpp
+ 
+Building target: robot_bluetoothReceiver.elf
+Invoking: AVR C++ Linker
+avr-gcc -s -Os -o"robot_bluetoothReceiver.elf"  ./SoftwareSerial/SoftwareSerial.o  ./motores.o ./robot_bluetoothReceiver.o ./sensorIR.o   -l"Arduino_Uno" -lm -L"/home/victor/workspace/avr_work/Arduino_Uno/Release" -mmcu=atmega328p
+Finished building target: robot_bluetoothReceiver.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S robot_bluetoothReceiver.elf  >"robot_bluetoothReceiver.lss"
+Finished building: robot_bluetoothReceiver.lss
+ 
+Create Flash image (ihex format)
+avr-objcopy -R .eeprom -O ihex robot_bluetoothReceiver.elf  "robot_bluetoothReceiver.hex"
+Finished building: robot_bluetoothReceiver.hex
+ 
+Create eeprom image (ihex format)
+avr-objcopy -j .eeprom --no-change-warnings --change-section-lma .eeprom=0 -O ihex robot_bluetoothReceiver.elf  "robot_bluetoothReceiver.eep"
+Finished building: robot_bluetoothReceiver.eep
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega328p robot_bluetoothReceiver.elf
+AVR Memory Usage
+----------------
+Device: atmega328p
+
+Program:   15680 bytes (47.9% Full)
+(.text + .data + .bootloader)
+
+Data:        680 bytes (33.2% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 
+
+22:26:36 Build Finished (took 458ms)
+

@@ -1,0 +1,7 @@
+Arduino\ Board=Arduino Uno
+Arduino\ IDE\ Version=1.0.5
+Arduino\ Path=/home/victor/arduino/arduino-1.0.5
+Arduino\ Port=/dev/ttyUSB0
+Private\ Library\ Path=/home/victor/arduino/arduino-1.0.5/libraries
+Use\ Arduino\ IDE\ Tools=true
+eclipse.preferences.version=1
