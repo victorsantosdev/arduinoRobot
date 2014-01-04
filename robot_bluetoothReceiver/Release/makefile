@@ -63,11 +63,14 @@ sizedummy \
 # All Target
 all: robot_bluetoothReceiver.elf secondary-outputs
 
+dependents:
+	-cd /home/victor/workspace/avr_work/ArduinoCore/Release && $(MAKE) all
+
 # Tool invocations
-robot_bluetoothReceiver.elf: $(OBJS) $(USER_OBJS)
+robot_bluetoothReceiver.elf: $(OBJS) $(USER_OBJS) /home/victor/workspace/avr_work/ArduinoCore/Release/libArduinoCore.a
 	@echo 'Building target: $@'
 	@echo 'Invoking: AVR C++ Linker'
-	avr-gcc -s -Os -o"robot_bluetoothReceiver.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -L"/Release" -mmcu=atmega328p
+	avr-gcc -s -Os -o"robot_bluetoothReceiver.elf" $(OBJS) $(USER_OBJS) $(LIBS) -lm -L"/Release" -L"/home/victor/workspace/avr_work/ArduinoCore/Release" -mmcu=atmega328p
 	@echo 'Finished building target: $@'
 	@echo ' '
 
@@ -104,5 +107,6 @@ secondary-outputs: $(LSS) $(FLASH_IMAGE) $(EEPROM_IMAGE) $(SIZEDUMMY)
 
 .PHONY: all clean dependents
 .SECONDARY:
+/home/victor/workspace/avr_work/ArduinoCore/Release/libArduinoCore.a:
 
 -include ../makefile.targets

@@ -1,0 +1,27 @@
+PORTC:
+C0: porta de leitura do sensor ir
+C1: porta echo do sonar 
+C2: porta trigger do sonar
+C3:
+C4:
+C5:
+
+PORTD:
+D0: hdw serial rx
+D1: hdw serial tx
+D2: sfw serial tx
+D3: sfw serial rx
+D4: motor in_a
+D5: motor pwm_a
+D6: motor pwm_b
+D7: motor in_b
+
+PORTB:
+B0: porta de sinal do buzzer
+B1: porta dir do driver do stepper
+B2: porta step do driver do stepper
+B3: chave fim de curso da esquerda
+B4: chave fim de curso da direita
+B5:
+
+

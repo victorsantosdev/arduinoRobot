@@ -4,112 +4,89 @@
  *  Created on: Dec 30, 2013
  *      Author: victor
  */
+/* Autor do algoritmo de controle das rodas: Jonatha Fogaça
+ * Created on: 02/01/2014
+ * */
+
 #include "Arduino.h"
 #include "motores.h"
 #include "LS_ATmega328.h"
 #include "sensorIR.h"
+#include "ultrasom.h"
+#include "math.h"
+
+void calcula_coordenadas(int joyX, int joyY, float &motor_esquerda, float &motor_direita) {
+
+	float resultante = 0;
+	float mystic_number = 78;
+	float tmp = 0, tempX = 0, tempY = 0;
+
+	tempY = pow(joyY,2);
+	tempX = pow(joyX,2);
+	tmp = tempX + tempY;
+	resultante = sqrt(tmp);
+	motor_direita = sqrt(tempX + tempY - (200*joyX) + 10000);
+	motor_esquerda = sqrt(tempX + tempY + (200*joyX) + 10000);
+	motor_direita = (int)(motor_direita*resultante)/mystic_number;
+	motor_esquerda = (int)(motor_esquerda*resultante)/mystic_number;
+	if (motor_direita >= 255) motor_direita = 255;
+	if (motor_esquerda >= 255) motor_esquerda = 255;
+	Serial.println("resultante: ");
+	Serial.print(resultante);
+	Serial.println("\nmotor_direita: ");
+	Serial.print(motor_direita);
+	Serial.println("\nmotor_esquerda: ");
+	Serial.print(motor_esquerda);
+	return;
+}
 
 void move_motores(int joyX, int joyY)
 {
 	int obstaculo_ir = 0;
+	unsigned int obstaculo_sonar = 0;
 
-	//int8_t a = 0; //variavel de PWM do motor A :roda da direita
-	//int8_t b = 0; //variavel de PWM do motor B :roda da esquerda
-	int a_tmp = 0;
-	int b_tmp = 0;
-	int joyX_tmp = 0;
-	int joyY_tmp = 0;
+	float motor_direita = 0;
+	float motor_esquerda = 0;
 
-	//trata primeiro quadrante e quarto quadrante
-	if ( ((joyY > 0 && joyX > 0) || (joyY < 0 && joyX > 0)) && (joyX < 70) ) {
-		joyX_tmp = abs(100 - joyX);
+	if (joyY > 0) {
+		obstaculo_ir = verificaObstaculo();
+		obstaculo_sonar = get_UltrasoundData();
+		//Serial.print("obstaculo_sonar: ");
+		//Serial.print(obstaculo_sonar);
 	}
-	else joyX_tmp = joyX;
+	//if (obstaculo_ir == 0) {
+	if ((obstaculo_ir == 0 && obstaculo_sonar == 0) || (obstaculo_ir == 0 && obstaculo_sonar == 0x02)) {
+		//Serial.println("sem obstaculo\n");
+		calcula_coordenadas(joyX, joyY, motor_esquerda, motor_direita);
+		analogWrite(MOTOR_PWMA, (int) motor_esquerda);
+		analogWrite(MOTOR_PWMB, (int) motor_direita);
 
-	//trata segundo quadrante e terceiro quadrante
-		if ( ((joyY > 0 && joyX < 0) || (joyY < 0 && joyX < 0)) && (abs(joyY) < 70) ) {
-			joyX_tmp = abs(100 + joyX);
-			joyY_tmp = abs(100 - joyY);
+		//primeiro quadrante
+		if (joyY > 0) {
+			pinMode(MOTOR_INB, INPUT);
+			digitalWrite(MOTOR_INB, HIGH);
+			pinMode(MOTOR_INA, INPUT);
+			digitalWrite(MOTOR_INA, HIGH);
 
+		} else {
+			pinMode(MOTOR_INB, OUTPUT);
+			digitalWrite(MOTOR_INB, LOW);
+			pinMode(MOTOR_INA, OUTPUT);
+			digitalWrite(MOTOR_INA, LOW);
 		}
-		else joyY_tmp = joyY;
-	//printf("a: %d\nb: %d\n\n", a, b); //debug
 
-		a_tmp = 3 * abs(joyX_tmp);
-		if (a_tmp >= 255) a_tmp = 255;
-
-		b_tmp = 3 * abs(joyY_tmp);
-		if (b_tmp >= 255) b_tmp = 255;
-
-	//	a_tmp = (int) (abs(a_tmp));
-	//	b_tmp = (int) (abs(b_tmp));
-
-		analogWrite(MOTOR_PWMA, a_tmp);
-		analogWrite(MOTOR_PWMB, b_tmp);
-
-		Serial.print("Motor PWMA: ");
-		Serial.print(a_tmp);
-		Serial.print(",Motor PWMB:");
-		Serial.println(b_tmp);
-
-	if (joyX > 0) { //vou para direita, aciona a roda da esquerda
-		pinMode(MOTOR_INA, INPUT);
-		digitalWrite(MOTOR_INA, HIGH);
-
-	} else {  //vou para esquerda, aciona a roda da direita
-		pinMode(MOTOR_INA, OUTPUT);
-		digitalWrite(MOTOR_INA, LOW);
 	}
 
-	if (joyY > 0) {  //vou para frente
-		pinMode(MOTOR_INB, INPUT);
-		digitalWrite(MOTOR_INB, HIGH);
-
-	} else {  //vou para trás
-		pinMode(MOTOR_INB, OUTPUT);
-		digitalWrite(MOTOR_INB, LOW);
+	//else if (obstaculo_ir == 1) {
+	else if (obstaculo_ir == 1 || obstaculo_sonar == 1) {
+		Serial.println("obstaculo\n");
+		analogWrite(MOTOR_PWMA, 0);
+		analogWrite(MOTOR_PWMB, 0);
+		obstacleAlarm();
+		obstaculo_ir = 0;
+		obstaculo_sonar = 0;
 	}
 
-	//////////////////////////////////
-	//	//if (eixoY >= 150) {
-	//	if (joyY >= 150) {
-	//		obstaculo_ir = verificaObstaculo();
-	//		//obstaculo_sonar = get_UltrasoundData();
-	//		//printf("variavel obstaculo_sonar: %u\n", obstaculo_sonar);
-	//	}
-	//	//if ((obstaculo_ir == 0 && obstaculo_sonar == 0) || (obstaculo_ir == 0 && obstaculo_sonar == 0x02)) {
-	//	if (obstaculo_ir == 0) {
-	//
-	//		Serial.println("sem obstaculo\n");
-	//		TIMER0_COMPARE_A_CONFIGURE(a_tmp);
-	//		TIMER0_COMPARE_B_CONFIGURE(b_tmp);
-	//
-	//		if (joyX > 0) {
-	//			pinMode(MOTOR_INA, INPUT);
-	//			digitalWrite(MOTOR_INA, HIGH);
-	//
-	//		} else {
-	//			pinMode(MOTOR_INA, OUTPUT);
-	//			digitalWrite(MOTOR_INA, LOW);
-	//		}
-	//
-	//		if (joyY > 0) {
-	//			pinMode(MOTOR_INB, INPUT);
-	//			digitalWrite(MOTOR_INB, HIGH);
-	//
-	//		} else {
-	//			pinMode(MOTOR_INB, OUTPUT);
-	//			digitalWrite(MOTOR_INB, LOW);
-	//		}
-	//		//} else if (obstaculo_ir == 1 || obstaculo_sonar == 1) {
-	//	} else if (obstaculo_ir == 1) {
-	//		Serial.println("obstaculo\n");
-	//		//TIMER0_CLOCK_PRESCALER_OFF();
-	//		analogWrite(MOTOR_PWMA, 0);
-	//		analogWrite(MOTOR_PWMB, 0);
-	//		obstaculo_ir = 0;
-	//		//obstaculo_sonar = 0;
-	//	}
 }
 
 

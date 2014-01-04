@@ -37,10 +37,5 @@
 			<type>2</type>
 			<locationURI>PARENT-3-PROJECT_LOC/arduino/arduino-1.0.5/hardware/arduino/cores/arduino</locationURI>
 		</link>
-		<link>
-			<name>motores.h</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/schwarzLib/motores.h</locationURI>
-		</link>
 	</linkedResources>
 </projectDescription>

@@ -5,11 +5,21 @@
  *      Author: victor
  */
 
+/* O sensor IR utiliza o canal 0 do ADC PORTC0 como porta de leitura */
+
 #include "sensorIR.h"
 #include <util/delay.h>
 #include "LS_ATmega328.h"
-
+#include "Arduino.h"
 //globals
+
+void obstacleAlarm(void) {
+//buzzer para alarmar obstaculo
+	tone(ALARM_PIN, ALARM_FREQUENCY, ALARM_DURATION);
+	delay(50);
+	noTone(ALARM_PIN);
+	delay(50);
+}
 
 int verificaObstaculo(void)
 {

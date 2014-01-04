@@ -28,6 +28,11 @@ byte dataByte = 0;                    // second Byte sent to Android device
 byte buttonStatus = 0;                // first Byte sent to Android device
 byte flagAutonomo = 0;
 
+//void stepper_init(void) {
+//	pinMode(STEPPER_DIRECTION, OUTPUT); //???????
+//	pinMode(STEPPER_STEP, OUTPUT);
+//}
+
 void sendData(byte button, byte data)    {
 	mySerial.write(STX); mySerial.write((button<<2)+4); mySerial.write(data+4); mySerial.write(ETX); // +4: avoid 0x2 & 0x3
 }
@@ -35,7 +40,8 @@ void sendData(byte button, byte data)    {
 void PWM_init(void) {
 	pinMode(MOTOR_PWMA,OUTPUT);
 	pinMode(MOTOR_PWMB, OUTPUT);
-
+	//	pinMode(MOTOR_INA, OUTPUT);
+	//	pinMode(MOTOR_INB, OUTPUT);
 	//TIMER 0 config: PWM
 	//TIMER0_CLOCK_PRESCALER_OFF(); //prescaler = 1
 	TIMER0_FAST_PWM_MAX_MODE();
@@ -43,6 +49,7 @@ void PWM_init(void) {
 	TIMER0_OC0B_CLEAR_ON_COMPARE();
 	Serial.println("PWM setup DONE...");
 }
+
 
 void ADC_init(void) {
 	DDRC = 0x00;
@@ -60,6 +67,11 @@ void ADC_init(void) {
 	Serial.println("ADC setup DONE...");
 }
 
+void buzzer_init(void){
+	//configure buzzer de alarme para obstaculo
+	pinMode(ALARM_PIN, OUTPUT);
+}
+
 void setup()  {
 
 	Serial.begin(57600);
@@ -72,6 +84,10 @@ void setup()  {
 	//configura o ADC
 	Serial.println("Enter ADC init...");
 	ADC_init();
+	Serial.println("Buzzer Alarm init...");
+	buzzer_init();
+	//Serial.println("Stepper Motor init...");
+	//stepper_init();
 
 	//habilita as mascaras de interrupcao
 	sei();

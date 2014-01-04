@@ -15,6 +15,7 @@
 #include <avr/io.h>
 #include <stdio.h>
 #include "LS_defines.h"
+
 #if __LS_DEFINES_H < 89
 #error Wrong definition file (LS_defines.h).
 #endif
