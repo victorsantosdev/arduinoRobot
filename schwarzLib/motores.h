@@ -16,7 +16,9 @@
 #define MOTOR_PWMA              PD5
 #define MOTOR_PWMB              PD6
 
+#include "math.h"
 void move_motores(int joyX, int joyY);
+void calcula_coordenadas(int joyX, int joyY, float *motor_esquerda, float *motor_direita);
 
 
 #endif

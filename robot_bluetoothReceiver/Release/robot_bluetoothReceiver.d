@@ -10,11 +10,12 @@ robot_bluetoothReceiver.d: ../robot_bluetoothReceiver.cpp \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/Printable.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/new.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard/pins_arduino.h \
- /home/victor/workspace/avr_work/schwarzLib/motores.h \
+ ../motores.h \
  /home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial/SoftwareSerial.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/Stream.h \
  ../LS_ATmega328.h \
- /home/victor/workspace/avr_work/schwarzLib/LS_defines.h
+ /home/victor/workspace/avr_work/schwarzLib/LS_defines.h ../sensorIR.h \
+ ../ultrasom.h ../ultrasom_stepper.h
 
 ../robot_bluetoothReceiver.h:
 
@@ -38,7 +39,7 @@ robot_bluetoothReceiver.d: ../robot_bluetoothReceiver.cpp \
 
 /home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard/pins_arduino.h:
 
-/home/victor/workspace/avr_work/schwarzLib/motores.h:
+../motores.h:
 
 /home/victor/arduino/arduino-1.0.5/libraries/SoftwareSerial/SoftwareSerial.h:
 
@@ -47,3 +48,9 @@ robot_bluetoothReceiver.d: ../robot_bluetoothReceiver.cpp \
 ../LS_ATmega328.h:
 
 /home/victor/workspace/avr_work/schwarzLib/LS_defines.h:
+
+../sensorIR.h:
+
+../ultrasom.h:
+
+../ultrasom_stepper.h:

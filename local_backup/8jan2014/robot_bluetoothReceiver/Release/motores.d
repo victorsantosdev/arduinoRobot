@@ -1,4 +1,4 @@
-ultrasom_stepper.d: ../ultrasom_stepper.cpp ../ultrasom_stepper.h \
+motores.d: ../motores.cpp \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/Arduino.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/binary.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/WCharacter.h \
@@ -9,9 +9,9 @@ ultrasom_stepper.d: ../ultrasom_stepper.cpp ../ultrasom_stepper.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/Printable.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/new.h \
  /home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard/pins_arduino.h \
- ../sensorIR.h
-
-../ultrasom_stepper.h:
+ ../motores.h ../LS_ATmega328.h \
+ /home/victor/workspace/avr_work/schwarzLib/LS_defines.h ../sensorIR.h \
+ ../ultrasom.h ../ultrasom_stepper.h
 
 /home/victor/arduino/arduino-1.0.5/hardware/arduino/cores/arduino/Arduino.h:
 
@@ -33,4 +33,14 @@ ultrasom_stepper.d: ../ultrasom_stepper.cpp ../ultrasom_stepper.h \
 
 /home/victor/arduino/arduino-1.0.5/hardware/arduino/variants/standard/pins_arduino.h:
 
+../motores.h:
+
+../LS_ATmega328.h:
+
+/home/victor/workspace/avr_work/schwarzLib/LS_defines.h:
+
 ../sensorIR.h:
+
+../ultrasom.h:
+
+../ultrasom_stepper.h:

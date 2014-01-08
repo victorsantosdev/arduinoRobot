@@ -92,10 +92,10 @@ void setup()  {
 	Serial.println("Buzzer Alarm init...");
 	buzzer_init();
 	Serial.println("End-Course switches init...");
-	switch_init();
+	//switch_init();
 	//Serial.println("Stepper Motor init...");
-	stepper_init();
-	set_stepper_zero();
+	//stepper_init();
+	//set_stepper_zero();
 
 	//habilita as mascaras de interrupcao
 	sei();
