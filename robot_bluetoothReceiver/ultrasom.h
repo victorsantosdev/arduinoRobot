@@ -7,7 +7,9 @@
 
 #ifndef ULTRASOM_H
 #define	ULTRASOM_H
-
+//define se ultrassom é estático ou diâmico (com stepper)
+#define DYNAMIC_ULTRASOUND
+#undef  DYNAMIC_ULTRASOUND
 #define ULTRASOUND_SHIELD_DDR           DDRC
 #define ULTRASOUND_SHIELD_PORT          PORTC
 #define ULTRASOUND_SHIELD_PIN           PINC

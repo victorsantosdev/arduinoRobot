@@ -48,7 +48,7 @@ This function measusers the width of high pulse in micro second.
 unsigned int resp;
 int distance;
 
-///////Função utilizando a lib do Arduino
+//******************** Função utilizando a lib do Arduino *************************************
 
 /* HC-SR04 Sensor
 https://www.dealextreme.com/p/hc-sr04-ultrasonic-sensor-distance-measuring-module-133696
@@ -71,8 +71,8 @@ This example code is in the public domain.
  */
 
 
-const int trigPin = 9;
-const int echoPin = 10;
+const int trigPin = A2; //PC2
+const int echoPin = A1; //PC1
 
 
 long microsecondsToInches(long microseconds)
@@ -129,7 +129,9 @@ int sonar_arduino() {
 	return obstaculo;
 }
 
-/////Função do sonar toda feita em C, sem a lib do Arduino
+//*********************************************************************************************
+
+//*********** Função do sonar toda feita em C, sem a lib do Arduino ***************************
 
 unsigned int getPulseWidth(void)
 {
@@ -233,7 +235,7 @@ unsigned int get_UltrasoundData(void)
 	}
 	return obstaculo_sonar;
 }
-//////////////////////////////////////////////////////////////////////////////////////
+//*********************************************************************************************
 
 int sweep_sonar(void) {
 	int i = 0;

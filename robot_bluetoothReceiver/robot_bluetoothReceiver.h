@@ -14,6 +14,7 @@
 #include "sensorIR.h"
 #include "ultrasom.h"
 #include "ultrasom_stepper.h"
+#include "debug.h"
 //end of add your includes here
 #ifdef __cplusplus
 extern "C" {

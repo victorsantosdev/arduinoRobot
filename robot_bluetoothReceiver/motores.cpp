@@ -15,6 +15,7 @@
 #include "ultrasom.h"
 #include "ultrasom_stepper.h"
 #include "math.h"
+#include "debug.h"
 //#include "StopWatch.h"
 
 void calcula_coordenadas(int joyX, int joyY, float &motor_esquerda, float &motor_direita) {
@@ -33,12 +34,15 @@ void calcula_coordenadas(int joyX, int joyY, float &motor_esquerda, float &motor
 	motor_esquerda = (int)(motor_esquerda*resultante)/mystic_number;
 	if (motor_direita >= 255) motor_direita = 255;
 	if (motor_esquerda >= 255) motor_esquerda = 255;
-//	Serial.println("resultante: ");
-//	Serial.print(resultante);
-//	Serial.println("\nmotor_direita: ");
-//	Serial.print(motor_direita);
-//	Serial.println("\nmotor_esquerda: ");
-//	Serial.print(motor_esquerda);
+
+#ifdef ROBOT_DEBUG
+		Serial.println("resultante: ");
+		Serial.print(resultante);
+		Serial.println("\nmotor_direita: ");
+		Serial.print(motor_direita);
+		Serial.println("\nmotor_esquerda: ");
+		Serial.print(motor_esquerda);
+#endif
 	return;
 }
 
@@ -57,14 +61,19 @@ void move_motores(int joyX, int joyY)
 	if (joyY > 0) {
 		obstaculo_ir = verificaObstaculo();
 
-		obstaculo_sonar = get_UltrasoundData();
-		//obstaculo_sonar = sweep_sonar();
-		//Serial.print("obstaculo_sonar: ");
-		//Serial.print(obstaculo_sonar);
+#ifdef DYNAMIC_ULTRASOUND //definido em ultrasom.h
+		obstaculo_sonar = sweep_sonar();		   //sweep dinamico
+#else
+		obstaculo_sonar = get_UltrasoundData();  //sweep estatico
+#endif
+#ifdef ROBOT_DEBUG
+		Serial.print("obstaculo_sonar: ");
+		Serial.print(obstaculo_sonar);
+#endif
 	}
 	//if (obstaculo_ir == 0) {
 	if ((obstaculo_ir == 0 && obstaculo_sonar == 0) || (obstaculo_ir == 0 && obstaculo_sonar == 0x02)) {  //teste
-	//if (obstaculo_ir == 0 && obstaculo_sonar == 0) {
+		//if (obstaculo_ir == 0 && obstaculo_sonar == 0) {
 		//Serial.println("sem obstaculo\n");
 		calcula_coordenadas(joyX, joyY, motor_esquerda, motor_direita);
 		analogWrite(MOTOR_PWMA, (int) motor_esquerda);
@@ -88,7 +97,9 @@ void move_motores(int joyX, int joyY)
 
 	//else if (obstaculo_ir == 1) {
 	else if (obstaculo_ir == 1 || obstaculo_sonar == 1) {
-		//Serial.println("obstaculo\n");
+	#ifdef ROBOT_DEBUG
+		Serial.println("obstaculo\n");
+	#endif
 		analogWrite(MOTOR_PWMA, 0);
 		analogWrite(MOTOR_PWMB, 0);
 		obstacleAlarm();
